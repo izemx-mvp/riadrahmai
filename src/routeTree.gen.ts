@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppUtilisateursRouteImport } from './routes/_app.utilisateurs'
+import { Route as AppTicketsRouteImport } from './routes/_app.tickets'
 import { Route as AppRhRouteImport } from './routes/_app.rh'
 import { Route as AppReclamationsRouteImport } from './routes/_app.reclamations'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
@@ -31,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppUtilisateursRoute = AppUtilisateursRouteImport.update({
   id: '/utilisateurs',
   path: '/utilisateurs',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTicketsRoute = AppTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
   getParentRoute: () => AppRoute,
 } as any)
 const AppRhRoute = AppRhRouteImport.update({
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AppDashboardRoute
   '/reclamations': typeof AppReclamationsRoute
   '/rh': typeof AppRhRoute
+  '/tickets': typeof AppTicketsRoute
   '/utilisateurs': typeof AppUtilisateursRoute
 }
 export interface FileRoutesByTo {
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AppDashboardRoute
   '/reclamations': typeof AppReclamationsRoute
   '/rh': typeof AppRhRoute
+  '/tickets': typeof AppTicketsRoute
   '/utilisateurs': typeof AppUtilisateursRoute
 }
 export interface FileRoutesById {
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/reclamations': typeof AppReclamationsRoute
   '/_app/rh': typeof AppRhRoute
+  '/_app/tickets': typeof AppTicketsRoute
   '/_app/utilisateurs': typeof AppUtilisateursRoute
 }
 export interface FileRouteTypes {
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/reclamations'
     | '/rh'
+    | '/tickets'
     | '/utilisateurs'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/reclamations'
     | '/rh'
+    | '/tickets'
     | '/utilisateurs'
   id:
     | '__root__'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/_app/dashboard'
     | '/_app/reclamations'
     | '/_app/rh'
+    | '/_app/tickets'
     | '/_app/utilisateurs'
   fileRoutesById: FileRoutesById
 }
@@ -156,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/utilisateurs'
       fullPath: '/utilisateurs'
       preLoaderRoute: typeof AppUtilisateursRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/tickets': {
+      id: '/_app/tickets'
+      path: '/tickets'
+      fullPath: '/tickets'
+      preLoaderRoute: typeof AppTicketsRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/rh': {
@@ -210,6 +229,7 @@ interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppReclamationsRoute: typeof AppReclamationsRoute
   AppRhRoute: typeof AppRhRoute
+  AppTicketsRoute: typeof AppTicketsRoute
   AppUtilisateursRoute: typeof AppUtilisateursRoute
 }
 
@@ -220,6 +240,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppReclamationsRoute: AppReclamationsRoute,
   AppRhRoute: AppRhRoute,
+  AppTicketsRoute: AppTicketsRoute,
   AppUtilisateursRoute: AppUtilisateursRoute,
 }
 
@@ -232,13 +253,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
