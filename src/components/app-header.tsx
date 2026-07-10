@@ -54,23 +54,33 @@ export function AppHeader() {
         <DropdownMenuTrigger asChild>
           <Button size="icon" variant="ghost" className="relative">
             <Bell className="h-5 w-5" />
-            <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-destructive" />
+            <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[0.6rem] font-bold text-destructive-foreground">
+              5
+            </span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-72">
+        <DropdownMenuContent align="end" className="w-80">
           <DropdownMenuLabel>Notifications</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="flex-col items-start gap-0.5">
-            <span className="text-sm font-medium">Réclamation transport urgente</span>
-            <span className="text-xs text-muted-foreground">Élève non récupéré à l'heure</span>
+            <span className="text-sm font-medium">Nouveau ticket urgent créé</span>
+            <span className="text-xs text-muted-foreground">#TCK-1001 — Retard transport scolaire</span>
           </DropdownMenuItem>
           <DropdownMenuItem className="flex-col items-start gap-0.5">
-            <span className="text-sm font-medium">Candidat HOT reçu</span>
-            <span className="text-xs text-muted-foreground">Enseignant Maths — 8 ans d'expérience</span>
+            <span className="text-sm font-medium">Ticket assigné à votre service</span>
+            <span className="text-xs text-muted-foreground">#TCK-1004 — Inscription CE1</span>
           </DropdownMenuItem>
           <DropdownMenuItem className="flex-col items-start gap-0.5">
-            <span className="text-sm font-medium">Prospect admission chaud</span>
-            <span className="text-xs text-muted-foreground">Visite souhaitée demain</span>
+            <span className="text-sm font-medium">Ticket escaladé à la direction</span>
+            <span className="text-xs text-muted-foreground">#TCK-1006 — RDV pédagogique</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="flex-col items-start gap-0.5">
+            <span className="text-sm font-medium">Ticket en attente &gt; 24h</span>
+            <span className="text-xs text-muted-foreground">#TCK-1005 — Candidature RH</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="flex-col items-start gap-0.5">
+            <span className="text-sm font-medium">Ticket clôturé avec succès</span>
+            <span className="text-xs text-muted-foreground">#TCK-1008 — Informations inscription MS</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
