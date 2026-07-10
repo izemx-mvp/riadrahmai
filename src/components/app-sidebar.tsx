@@ -7,6 +7,7 @@ import {
   MessagesSquare,
   Bot,
   Users,
+  ClipboardList,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
 import {
@@ -32,6 +33,7 @@ const agentItems = [
 ];
 
 const workItems = [
+  { title: "Tickets & Assignation", url: "/tickets", icon: ClipboardList },
   { title: "Conversations", url: "/conversations", icon: MessagesSquare },
   { title: "Configuration IA", url: "/configuration-ia", icon: Bot },
 ];
